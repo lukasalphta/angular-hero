@@ -1,0 +1,8 @@
+<form novalidate [formGroup]="myForm">
+  <label for="firstname">Vorname</label>
+  <input id="firstname" type="text" name="firstName" formControlName="firstName" />
+  <label for="lastname">Nachname</label>
+  <input if="lastname" type="text" name="lastName" formControlName="lastName" />
+
+  <button id="submit" type="submit" [disabled]="!myForm.valid || !myForm.touched"> Absenden! </button>
+</form>
