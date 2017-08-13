@@ -1,0 +1,33 @@
+<!--The whole content below can be removed with the new code.-->
+<div style="text-align:center">
+  <h1>
+    {{title}}!
+  </h1>
+</div>
+
+<form novalidate [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <label for="firstname">Vorname</label>
+  <input id="firstname" type="text" name="firstName" formControlName="firstName" />
+  <label for="lastname">Nachname</label>
+  <input id="lastname" type="text" name="lastName" formControlName="lastName" />
+  <ul>
+    <li *ngFor='let product of form.controls.products.controls let i = index' [formGroup]="product">
+      {{ product.controls.name.value }}
+      <input type="checkbox" [name]="product.controls.name.value" [formControl]="product.controls.ordered">
+      {{ product.controls.price.value }} €
+    </li>
+  </ul>
+
+  <button id="submit" type="submit" [disabled]="!form.valid || !form.touched"> Absenden! </button>
+
+  <ng-container *ngIf="order">
+    <hr>
+    <h4>Ihr Auftrag</h4>
+    <p> Vorname: {{ order.firstName }} </p>
+    <p> Nachname: {{ order.lastName }} </p>
+    <p> Produkte: </p>
+    <ul>
+      <li *ngFor="let product of order.products"> {{ product }}</li>
+    </ul>
+    <p> Gesamter Preis: {{ order.total }} € </p>
+   </ng-container>
